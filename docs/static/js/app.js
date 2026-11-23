@@ -6,7 +6,7 @@ import {
 import { caseStudy } from "./project.js";
 import { resume } from "./resume.js";
 import * as sections from "./sections.js";
-import { api, esc, norm, state } from "./util.js";
+import { api, esc, norm, state, withExperience } from "./util.js";
 
 const root = document.getElementById("app");
 const page = document.body.dataset.page;
@@ -34,11 +34,12 @@ function afterRender() {
 }
 
 async function renderHome() {
-  const [profile, links, impact, experience, projects, skills, certifications, recognition, education, approach, meta] =
+  const [profileData, links, impact, experience, projects, skills, certifications, recognition, education, approach, beyond, meta] =
     await Promise.all([
       "profile", "links", "impact", "experience", "projects", "skills",
-      "certifications", "recognition", "education", "approach", "meta",
+      "certifications", "recognition", "education", "approach", "beyond", "meta",
     ].map((name) => api(name)));
+  const profile = withExperience(profileData);
   state.lookup = skills.lookup;
   root.innerHTML = [
     sections.hero(profile, links, skills.marquee),
@@ -52,6 +53,7 @@ async function renderHome() {
     sections.education(education),
     sections.earlyWork(education),
     sections.approach(approach),
+    sections.beyondWork(beyond),
     sections.contact(links),
   ].join("");
   bindProjectFilter(projects);
@@ -76,11 +78,12 @@ function bindProjectFilter(projects) {
 }
 
 async function renderResume() {
-  const [profile, links, impact, experience, projects, skills, certifications, recognition, education, meta] =
+  const [profileData, links, impact, experience, projects, skills, certifications, recognition, education, meta] =
     await Promise.all([
       "profile", "links", "impact", "experience", "projects", "skills",
       "certifications", "recognition", "education", "meta",
     ].map((name) => api(name)));
+  const profile = withExperience(profileData);
   state.lookup = skills.lookup;
   root.innerHTML = resume({ profile, links, impact, experience, projects, skills, certifications, recognition, education, meta });
 }

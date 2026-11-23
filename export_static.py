@@ -21,7 +21,7 @@ OUT = ROOT / "docs"
 
 API_NAMES = [
     "profile", "links", "meta", "impact", "experience", "projects", "skills",
-    "certifications", "recognition", "education", "approach",
+    "certifications", "recognition", "education", "approach", "beyond",
 ]
 
 

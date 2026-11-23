@@ -160,6 +160,11 @@ def api_approach():
     return ok([{"title": t, "description": text, "icon": icon} for t, text, icon in d.APPROACH])
 
 
+@app.get("/api/beyond")
+def api_beyond():
+    return ok(d.BEYOND_WORK)
+
+
 # ---------------------------------------------------------------------------
 # Pages (HTML shells; content is rendered in the browser from the API)
 # ---------------------------------------------------------------------------

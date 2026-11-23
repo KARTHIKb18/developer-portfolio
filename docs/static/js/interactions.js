@@ -254,6 +254,8 @@ export function initActiveNav() {
     const target = document.getElementById(link.dataset.nav);
     if (target) io.observe(target);
   });
+  // Sections that are not in the menu (impact, recognition, beyond work...) clear the highlight.
+  $$("main section[id]").forEach((section) => io.observe(section));
 }
 
 /* ---------- Reading progress bar ---------- */

@@ -37,7 +37,7 @@ PERSON = {
         "AI-enabled solutions that solve real operational challenges."
     ),
     "hero_blurb": (
-        "Nearly five years across enterprise application development, workflow automation, "
+        "{{Experience}} across enterprise application development, workflow automation, "
         "AI-enabled solutions, data processing, testing, and production support."
     ),
     "description": (
@@ -50,7 +50,7 @@ PERSON = {
         "Forensic technology", "AI-enabled applications",
     ],
     "about": [
-        "I am an Associate Consultant and custom application developer with nearly five years of "
+        "I am an Associate Consultant and custom application developer with {{experience}} of "
         "experience building enterprise applications, process-automation tools, data-processing "
         "workflows, and AI-enabled solutions.",
         "I currently work within Forensic Technology, where I contribute to Python automation, REST API "
@@ -65,12 +65,15 @@ PERSON = {
         "testing, data validation, user-experience improvement, and clear technical communication.",
     ],
     "resume_summary": (
-        "Associate Consultant and custom application developer with nearly five years of experience "
+        "Associate Consultant and custom application developer with {{experience}} of experience "
         "in enterprise applications, Python automation, AI-enabled solutions, RelativityOne "
         "applications, REST API integration, Azure-based workflows, data processing, testing, and "
         "production support across forensic technology and fintech."
     ),
     "location": "Bengaluru, India",
+    # First month of professional work (YYYY-MM). The site works out the years of experience from this
+    # date and the visitor's current date, wherever {{experience}} or {{Experience}} appears below.
+    "career_start": "2022-01",
     "focus_areas": [
         "Custom application development",
         "Python automation",
@@ -89,7 +92,7 @@ PERSON = {
     "stats": [
         ("Role", "Associate Consultant"),
         ("Based", "Bengaluru, India"),
-        ("Experience", "Nearly 5 years"),
+        ("Experience", "{{Experience}}"),
         ("Domains", "Forensic tech · Fintech · Legal tech"),
     ],
     "hero_phrases": [
@@ -707,6 +710,36 @@ ACADEMIC_PROJECTS = [
      "summary": "A web-based application intended to support remote examination administration.",
      "capabilities": [], "stack": ["Python", "Flask", "MySQL", "HTML5", "CSS3", "JavaScript"], "result": None},
 ]
+
+# ---------------------------------------------------------------------------
+# Beyond work: who I am outside of the job. Edit the wording freely.
+# ---------------------------------------------------------------------------
+
+BEYOND_WORK = {
+    "title": "Beyond the keyboard",
+    "lead": "A little about who I am when I'm not at work.",
+    "interests": [
+        {"icon": "bike", "title": "On two wheels",
+         "text": "I'm a biker. I love a long road ride as much as a rough adventure trail, and planning the route is half the fun."},
+        {"icon": "gamepad", "title": "Video games",
+         "text": "Gaming is how I switch off. My all-time favourite is Need for Speed: Most Wanted.",
+         "favourite": "Favourite: NFS Most Wanted"},
+        {"icon": "car", "title": "Diecast collecting",
+         "text": "A newer hobby: collecting good diecast models and enjoying the small details in each one."},
+        {"icon": "compass", "title": "Places, food and people",
+         "text": "I love exploring new places, trying local food, and talking to new people to learn about them and where they come from."},
+    ],
+    "people_title": "The friendly go-to person",
+    "people_lead": "What that curiosity looks like day to day, at work and outside it:",
+    "people": [
+        "Easy to talk to, and happy to start the conversation with someone new.",
+        "The person you can message when you're stuck: a bug, a deployment, or just a second pair of eyes.",
+        "Curious by habit. I like understanding how a place, a person or a system works before I jump in.",
+        "Patient and calm when things get urgent, and glad to stay with a problem until it is sorted.",
+        "Someone who shares what I learn, through notes, documentation and a quick walkthrough.",
+        "A good teammate on a long ride or a long release: I look out for the people around me.",
+    ],
+}
 
 APPROACH = [
     ("Clarify the requirement", "Work with stakeholders to refine requirements and confirm expected behaviour before building.", "search"),

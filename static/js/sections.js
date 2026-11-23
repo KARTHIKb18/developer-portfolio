@@ -89,7 +89,7 @@ export function about(p) {
     <ul class="focus-list">${each(p.focus_areas, (t) => `<li>${esc(t)}</li>`)}</ul>
   </aside>
 </div>`;
-  return section("about", 1, "About", "Professional summary", inner);
+  return section("about", 1, "About", "Let me introduce myself", inner);
 }
 
 export function impact(items) {
@@ -296,11 +296,28 @@ export function approach(steps) {
   return section("approach", 10, "Approach", "How I work", `<ol class="approach-grid">${items}</ol>`);
 }
 
+export function beyondWork(data) {
+  const cards = each(
+    data.interests,
+    (item) => `
+<li class="reveal"><span class="icon-box">${icon(item.icon)}</span><h3>${esc(item.title)}</h3>
+  <p class="muted">${esc(item.text)}</p>${item.favourite ? `<p class="label accent-text">${esc(item.favourite)}</p>` : ""}</li>`,
+  );
+  const inner = `
+<ul class="life-grid">${cards}</ul>
+<div class="reveal">
+  <h3 class="subhead">${esc(data.people_title)}</h3>
+  <p class="muted" style="margin-bottom:1rem">${esc(data.people_lead)}</p>
+  <ul class="focus-list two-col">${each(data.people, (t) => `<li>${esc(t)}</li>`)}</ul>
+</div>`;
+  return section("beyond-work", 11, "Beyond work", data.title, inner, data.lead);
+}
+
 export function contact(links) {
   return `
 <section id="contact" class="section contact-slab" aria-labelledby="contact-title">
   <div class="container">
-    <p class="sec-num reveal">11 / Contact</p>
+    <p class="sec-num reveal">12 / Contact</p>
     <h2 id="contact-title" class="contact-title reveal" style="margin-top:1rem">Let&rsquo;s <span>talk.</span></h2>
     <p class="contact-copy reveal">The fastest way to reach me is through my professional profiles. My interactive resume is also available to view or save as PDF.</p>
     <div class="hero-cta reveal">${socialButtons(links, true)}<a class="btn btn-ghost" href="${routes.resume()}">${icon("file-text")}Interactive resume</a></div>
