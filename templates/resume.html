@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% from '_icons.html' import icon %}
+{% block body_class %}resume-page{% endblock %}
+{% block main %}
+<div class="container resume-wrap">
+  <div class="resume-toolbar no-print">
+    <a class="text-link" href="{{ home_url }}">&larr; Back to portfolio</a>
+    <div class="toolbar-actions">
+      <div class="view-toggle" role="group" aria-label="Resume detail level">
+        <button type="button" class="seg" data-view-btn="compact" aria-pressed="true">Compact</button>
+        <button type="button" class="seg" data-view-btn="detailed" aria-pressed="false">Detailed</button>
+      </div>
+      <button type="button" class="btn btn-primary" id="print-btn">{{ icon('printer') }}Save as PDF</button>
+    </div>
+  </div>
+  <p class="muted small no-print">Compact is a short recruiter summary; Detailed is the full resume. &ldquo;Save as PDF&rdquo; opens your browser&rsquo;s print dialog &ndash; choose &ldquo;Save as PDF&rdquo; as the destination. Select a skill to highlight related roles and projects.</p>
+  <div id="app" aria-busy="true"><p class="loading" role="status">Loading resume&hellip;</p></div>
+  <noscript><p>Please enable JavaScript to view the resume.</p></noscript>
+</div>
+{% endblock %}

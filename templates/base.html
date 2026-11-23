@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+{% from '_icons.html' import icon %}
+{% set nav_items = [('about', 'About'), ('experience', 'Experience'), ('projects', 'Projects'), ('skills', 'Skills'), ('certifications', 'Certifications'), ('contact', 'Contact')] %}
+{% set prefix = '' if page == 'home' else home_url %}
+<html lang="en" data-view="compact">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ title }}</title>
+{% if description %}<meta name="description" content="{{ description }}">{% endif %}
+<meta name="keywords" content="{{ keywords }}">
+<meta name="author" content="{{ person.name }}">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#070a14">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:description" content="{{ description }}">
+<meta property="og:site_name" content="{{ person.name }} – Portfolio">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{{ title }}">
+<meta name="twitter:description" content="{{ description }}">
+{% if canonical %}<link rel="canonical" href="{{ canonical }}">
+<meta property="og:url" content="{{ canonical }}">{% endif %}
+{% if static_mode %}<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; style-src-attr 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'">{% endif %}
+<link rel="preload" href="{{ root }}static/fonts/BricolageGrotesque.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ root }}static/fonts/Geist.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="{{ root }}static/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="{{ root }}static/css/site.css">
+<script src="{{ root }}static/js/theme-init.js"></script>
+{% for item in jsonld %}<script type="application/ld+json">{{ item | tojson }}</script>
+{% endfor %}
+</head>
+<body class="{% block body_class %}{% endblock %}" data-page="{{ page }}" data-root="{{ root }}" data-static="{{ 'true' if static_mode else 'false' }}">
+<a class="skip-link no-print" href="#main">Skip to content</a>
+<div class="progress no-print" id="progress" aria-hidden="true"></div>
+
+<header class="site-header no-print">
+  <nav class="container nav" aria-label="Primary">
+    <a class="brand" href="{{ '#home' if page == 'home' else home_url }}" aria-label="{{ person.name }}, home">
+      <span class="brand-script">{{ person.name }}</span>
+    </a>
+    <ul class="nav-links">
+      {% for sid, label in nav_items %}<li><a class="nav-link" data-nav="{{ sid }}" href="{{ prefix }}#{{ sid }}">{{ label }}</a></li>
+      {% endfor %}
+    </ul>
+    <div class="nav-actions">
+      <a class="btn btn-ghost nav-resume" href="{{ resume_url }}">{{ icon('file-text') }}Resume</a>
+      <button type="button" class="icon-btn" id="theme-toggle" aria-label="Toggle between dark and light theme">
+        <span class="theme-sun">{{ icon('sun') }}</span><span class="theme-moon">{{ icon('moon') }}</span>
+      </button>
+      <button type="button" class="icon-btn menu-btn" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+        <span class="menu-open">{{ icon('menu') }}</span><span class="menu-close">{{ icon('x') }}</span>
+      </button>
+    </div>
+  </nav>
+  <div id="mobile-menu" class="mobile-menu" hidden>
+    <ul>
+      {% for sid, label in nav_items %}<li><a href="{{ prefix }}#{{ sid }}" data-close-menu>{{ label }}</a></li>
+      {% endfor %}
+      <li><a href="{{ resume_url }}" data-close-menu>Interactive resume</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main">
+{% block main %}{% endblock %}
+</main>
+
+<footer class="site-footer no-print">
+  <div class="container footer-inner">
+    <div>
+      <p class="footer-name">{{ person.name }}</p>
+      <p class="muted">{{ person.headline }}</p>
+      <p class="muted small footer-note">{{ note }}</p>
+    </div>
+    <div class="footer-right">
+      {% if links.linkedin or links.github %}
+      <ul class="footer-social">
+        {% if links.linkedin %}<li><a class="icon-btn" href="{{ links.linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)">{{ icon('linkedin') }}</a></li>{% endif %}
+        {% if links.github %}<li><a class="icon-btn" href="{{ links.github }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)">{{ icon('github') }}</a></li>{% endif %}
+      </ul>
+      {% endif %}
+      <p class="muted small">&copy; {{ year }} {{ person.name }}</p>
+    </div>
+  </div>
+</footer>
+
+<div id="skill-bar" class="skill-bar no-print" hidden>
+  <p><span class="muted">Highlighting</span> <strong id="skill-bar-name"></strong> <span class="muted" id="skill-bar-count"></span></p>
+  <button type="button" class="btn btn-ghost" id="skill-bar-clear">{{ icon('x') }}Clear</button>
+</div>
+<p class="sr-only" role="status" aria-live="polite" id="live-status"></p>
+<script type="module" src="{{ root }}static/js/app.js"></script>
+</body>
+</html>

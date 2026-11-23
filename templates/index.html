@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block main %}
+<div id="app" aria-busy="true"><p class="container loading" role="status">Loading portfolio&hellip;</p></div>
+<noscript>
+  <div class="container section">
+    <h1>{{ person.name }}</h1>
+    <p>{{ person.headline }}</p>
+    <p>{{ person.tagline }}</p>
+    <p>This portfolio loads its content from a small API with JavaScript. Please enable JavaScript to view projects, experience and skills.</p>
+    {% if links.linkedin %}<p><a href="{{ links.linkedin }}" rel="noopener noreferrer">LinkedIn profile</a></p>{% endif %}
+  </div>
+</noscript>
+{% endblock %}
